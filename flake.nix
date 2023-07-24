@@ -12,7 +12,7 @@
     {
       defaultPackage.x86_64-darwin = pkgs.writeShellScriptBin "piscis" ''
         #!/bin/sh
-        exec ${prolog}/bin/scryer-prolog main.pl -g main
+        exec ${prolog}/bin/scryer-prolog ${self}/main.pl -g main
       '';
     };
 }
