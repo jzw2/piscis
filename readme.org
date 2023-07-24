@@ -2,3 +2,14 @@
 
 
 I do not like bash
+
+* How to Run
+
+
+With the power of Nix, you can run it immediatly from the terminal.
+
+#+begin_src bash
+nix run github:jzw2/piscis
+#+end_src
+
+*Please note that it currently only works on MacOS*
