@@ -1,7 +1,7 @@
 #+title: Readme
 
 
-I do not like bash
+A new prolog inspired shell, written in [[https://github.com/mthom/scryer-prolog][Scryer Prolog]] .
 
 * How to Run
 
