@@ -34,15 +34,21 @@ save :- format("\x1b\[s", []).
 
 load :- format("\x1b\[u", []).
 
+backspace :- format("\x1b\H", []).
+
+backspace2 :- format("~b", []).
+
 report :- format("\x1b\[6n ok what next", []), read(X), write(X).
 
 repl :-
     %% format("~n><> ",[]),
         %%  current_input(InputStream),
         get_single_char(C),
-        format("~w", [C]),
-        (C = '\n', format("We are done", []);
-        repl).
+
+        (C = '\x1b\H' -> format("We are done", []);
+                C = '\b' -> write('\b'), repl;
+        format("~w", [C]), repl).
+
         %% get_line_to_chars(InputStream, RawInput, []),
         %% append(NoNewLine, "\n", RawInput),
         %% (NoNewLine = "exit" , write('OK Bye!'), halt;

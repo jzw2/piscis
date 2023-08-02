@@ -3,6 +3,9 @@
 
 A new prolog inspired shell, written in [[https://github.com/mthom/scryer-prolog][Scryer Prolog]] .
 
+
+OK, making a tui is too painful, I'm changin the direction of this. I don'rt know somebody fix this for me pls.
+
 * How to Run
 
 
