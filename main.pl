@@ -6,25 +6,45 @@
 :- use_module(library(charsio)).
 :- use_module(library(lists)).
 
-:- initialization(main).
+%% :- initialization(main).
 
 as --> [].
 as --> [a], as.
 
-xs(said_hi) --> "hi" .
-xs(quit) --> "quit" .
+dollar_variable(X) --> "$" , lower(X) .
 
-%% main :- phrase_from_stream(xs(Thing), user_input), format("~w", [Thing]).
-%%
-%%
+lower([S]) --> [S], { char_type(S, lower) }.
+lower([Char | Rest]) --> [Char], { char_type(Char, lower) }, lower(Rest).
 
 main :- format("Welcome to the shell~n", []), repl.
 
 
-repl :- format("~n><>",[]),
-        current_input(InputStream),
-        get_line_to_chars(InputStream, RawInput, []),
-        append(NoNewLine, "\n", RawInput),
-        (NoNewLine = "exit" , write('OK Bye!'), halt;
-        format("You entreed command ~s, executing ~n", [NoNewLine]),  (shell(NoNewLine) -> format("Sucesss!", []), repl ;
-        write('Oops, that didn\'t work, try again. '), repl) ).
+red :-  format("\x1b\[1;31m  hi", []).
+
+up(N) :- format("\x1b\[~wA", [N]) .
+
+
+clear :- format("\x1b\[2J", []).
+
+home :- format("\x1b\[H", []).
+
+getplace :- format("\x1b\[6n", []).
+
+save :- format("\x1b\[s", []).
+
+load :- format("\x1b\[u", []).
+
+report :- format("\x1b\[6n ok what next", []), read(X), write(X).
+
+repl :-
+    %% format("~n><> ",[]),
+        %%  current_input(InputStream),
+        get_single_char(C),
+        format("~w", [C]),
+        (C = '\n', format("We are done", []);
+        repl).
+        %% get_line_to_chars(InputStream, RawInput, []),
+        %% append(NoNewLine, "\n", RawInput),
+        %% (NoNewLine = "exit" , write('OK Bye!'), halt;
+        %% format("You entreed command ~s, executing ~n", [NoNewLine]),  (shell(NoNewLine) -> format("Sucesss!", []), repl ;
+        %% write('Oops, that didn\'t work, try again. '), repl) ).
