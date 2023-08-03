@@ -16,3 +16,22 @@ nix run github:jzw2/piscis
 #+end_src
 
 *Please note that it currently only works on MacOS*
+
+* Syntax
+** Variables
+I will steal the variables of bash (still wonderig if this is a good idea, since it does kind of look ugly), and variables will be prefixed with a dollar sign.
+
+#+begin_src
+ls $x, echo $x
+#+end_src
+
+** No paretheses
+
+Because I hate parentheses, they will be optional.
+
+#+begin_src
+ls $x, isPython $x, echo $x
+#+end_src
+
+
+Note this means that you lose the homoiconicity of prolog.
